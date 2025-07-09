@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import subprocess
 
 from access_functions import (get_scripts_by_username, has_access_to_script,
@@ -17,3 +17,8 @@ def run_script(script_id):
     script_id = int(script_id)
     if has_access_to_script("Example", script_id):
         subprocess.call(["/bin/sh", get_script_file_by_id(script_id)])
+    else:
+        raise HTTPException(
+            status_code=403,
+            detail="Unauthorized to run this script"
+        )
