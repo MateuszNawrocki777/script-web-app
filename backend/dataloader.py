@@ -9,3 +9,7 @@ def load_scripts():
 def load_users():
     with open("./users.json") as fh:
         return json.load(fh)
+
+
+SCRIPTS = load_scripts()
+USERS = load_users()

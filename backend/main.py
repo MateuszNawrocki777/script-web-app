@@ -1,13 +1,10 @@
 from fastapi import FastAPI
 
-from dataloader import load_scripts, load_users
+from access_functions import get_scripts_by_username
 
 app = FastAPI()
 
-SCRIPTS = load_scripts()
-USERS = load_users()
-
 
 @app.get("/scripts")
-def read_root():
-    return SCRIPTS
+def get_my_scripts():
+    return get_scripts_by_username("Example")
