@@ -19,3 +19,13 @@ def get_scripts_by_username(username: str):
         if script["id"] in script_ids:
             script_list.append(script)
     return script_list
+
+
+def has_access_to_script(username: str, script_id: int):
+    return script_id in get_script_ids_by_username(username)
+
+
+def get_script_file_by_id(script_id: int):
+    for script in SCRIPTS:
+        if script["id"] == script_id:
+            return script["file"]
