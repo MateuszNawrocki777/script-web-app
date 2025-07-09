@@ -1,14 +1,13 @@
 from fastapi import FastAPI
-import subprocess
 
-from dataloader import load_scripts
+from dataloader import load_scripts, load_users
 
 app = FastAPI()
 
 SCRIPTS = load_scripts()
+USERS = load_users()
 
 
-@app.get("/")
+@app.get("/scripts")
 def read_root():
-    subprocess.call(["/bin/sh", SCRIPTS[0]["file"]])
     return SCRIPTS
