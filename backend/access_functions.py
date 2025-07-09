@@ -1,3 +1,5 @@
+from fastapi import HTTPException
+
 from dataloader import SCRIPTS, USERS
 
 
@@ -5,6 +7,7 @@ def get_user_by_username(username: str):
     for user in USERS:
         if user["username"] == username:
             return user
+    raise HTTPException(status_code=400, detail="User not found")
 
 
 def get_script_ids_by_username(username: str):
@@ -29,3 +32,4 @@ def get_script_file_by_id(script_id: int):
     for script in SCRIPTS:
         if script["id"] == script_id:
             return script["file"]
+    raise HTTPException(status_code=400, detail="Script not found")
