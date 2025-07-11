@@ -16,6 +16,12 @@ def get_my_scripts():
 def run_script(script_id):
     script_id = int(script_id)
     if has_access_to_script("Example", script_id):
+        script_file = get_script_file_by_id(script_id)
+        if script_file is None:
+            raise HTTPException(
+                status_code=401,
+                detail="Script file not found"
+            )
         subprocess.call(["/bin/sh", get_script_file_by_id(script_id)])
     else:
         raise HTTPException(
