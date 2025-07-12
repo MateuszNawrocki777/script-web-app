@@ -33,3 +33,9 @@ def get_script_file_by_id(script_id: int):
         if script["id"] == script_id:
             return script["file"]
     return None
+
+
+def exists_user_with_username(username: str):
+    if get_user_by_username(username) is None:
+        return False
+    return True

@@ -1,5 +1,9 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.security import OAuth2PasswordRequestForm
 import subprocess
+from typing import Annotated
+
+from security import get_username, login_function
 
 from access_functions import (get_scripts_by_username, has_access_to_script,
                               get_script_file_by_id)
@@ -8,14 +12,14 @@ app = FastAPI()
 
 
 @app.get("/scripts")
-def get_my_scripts():
-    return get_scripts_by_username("Example")
+def get_my_scripts(username: Annotated[str, Depends(get_username)]):
+    return get_scripts_by_username(username)
 
 
 @app.post("/run/{script_id}")
-def run_script(script_id):
+def run_script(script_id, username: Annotated[str, Depends(get_username)]):
     script_id = int(script_id)
-    if has_access_to_script("Example", script_id):
+    if has_access_to_script(username, script_id):
         script_file = get_script_file_by_id(script_id)
         if script_file is None:
             raise HTTPException(
@@ -28,3 +32,7 @@ def run_script(script_id):
             status_code=403,
             detail="Unauthorized to run this script"
         )
+
+@app.post("/login")
+def login(data_form: Annotated[OAuth2PasswordRequestForm, Depends()]):
+    return login_function(data_form)
