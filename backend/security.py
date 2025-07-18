@@ -33,10 +33,12 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 class User(BaseModel):
     username: str
     hashedPassword: str
     scriptIds: list[int]
+
 
 class Token(BaseModel):
     access_token: str
@@ -66,12 +68,13 @@ def login_function(data_form: Annotated[OAuth2PasswordRequestForm, Depends()]):
         raise AUTHORIZATION_EXCEPTION
     if not check_password(user, password):
         raise AUTHORIZATION_EXCEPTION
-    
+
     return generate_token(username)
-    
+
 
 def check_password(user: User, password: str):
-        return pwd_context.verify(password, user["hashedPassword"])
+    return pwd_context.verify(password, user["hashedPassword"])
+
 
 def generate_token(username: str):
     expire = datetime.now(timezone.utc) + timedelta(TOKEN_VALIDITY_MINUTES)

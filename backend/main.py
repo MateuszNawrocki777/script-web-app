@@ -33,6 +33,7 @@ def run_script(script_id, username: Annotated[str, Depends(get_username)]):
             detail="Unauthorized to run this script"
         )
 
+
 @app.post("/login")
 def login(data_form: Annotated[OAuth2PasswordRequestForm, Depends()]):
     return login_function(data_form)
