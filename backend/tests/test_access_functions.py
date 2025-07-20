@@ -46,6 +46,7 @@ def use_test_db(monkeypatch: MonkeyPatch):
 
 def test_sanity_test():
     assert True
+    # assert False
 
 
 def test_get_user_by_username_found(use_test_db):
