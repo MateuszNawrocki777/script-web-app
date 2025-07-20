@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 from passlib.context import CryptContext
 import jwt
-from jwt.exceptions import InvalidTokenError
+from jwt.exceptions import InvalidTokenError, ExpiredSignatureError
 from datetime import datetime, timedelta, timezone
 
 from access_functions import get_user_by_username, exists_user_with_username
@@ -23,10 +23,16 @@ ALGORITHM = "HS256"
 SECURITY_SECRET_KEY = os.getenv("SECURITY_SECRET_KEY")
 
 AUTHORIZATION_EXCEPTION = HTTPException(
-        status_code=403,
-        detail="Invalid username or password",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+    status_code=403,
+    detail="Invalid username or password",
+    headers={"WWW-Authenticate": "Bearer"},
+)
+
+EXPIRED_TOKEN_EXCEPTION = HTTPException(
+    status_code=405,
+    detail="JWT Token has expired",
+    headers={"WWW-Authenticate": "Bearer"},
+)
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
@@ -54,8 +60,9 @@ def get_username(token: Annotated[str, Depends(oauth2_scheme)]):
         if not exists_user_with_username(username):
             raise AUTHORIZATION_EXCEPTION
         return username
+    except ExpiredSignatureError:
+        raise EXPIRED_TOKEN_EXCEPTION
     except InvalidTokenError:
-        print("Invalid token")
         raise AUTHORIZATION_EXCEPTION
 
 
