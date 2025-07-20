@@ -18,9 +18,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-TOKEN_VALIDITY_MINUTES = 10
 ALGORITHM = "HS256"
 SECURITY_SECRET_KEY = os.getenv("SECURITY_SECRET_KEY")
+TOKEN_VALIDITY_MINUTES = int(os.getenv("TOKEN_VALIDITY_MINUTES"))
 
 AUTHORIZATION_EXCEPTION = HTTPException(
     status_code=403,
