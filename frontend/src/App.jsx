@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 
+import LoginTab from './components/Login'
+
+
 function App() {
   return (
     <>
-      <h1>Login</h1>
+      <LoginTab />
     </>
   )
 }

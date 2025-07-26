@@ -1,0 +1,15 @@
+.login-tab {
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    padding: 50px;
+    min-width: 30vw;
+}
+
+.login-tab > h1 {
+    margin-top: 0px;
+}
+
+.login-button {
+    margin-bottom: 15px;
+}
