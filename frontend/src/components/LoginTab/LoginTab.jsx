@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import logInRequest from "../services/api/requests/login";
+import logInRequest from "../../services/api/requests/login";
 
-import "./Login.css"
+import "./LoginTab.css"
 
 let username = "", password = "";
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 
-import LoginTab from './components/Login'
+import LoginTab from './components/LoginTab/LoginTab'
 
 
 function App() {
