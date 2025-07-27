@@ -5,11 +5,13 @@ import LoginTab from './components/Login'
 
 
 function App() {
-  return (
-    <>
-      <LoginTab />
-    </>
-  )
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    return (
+        <>
+            {!loggedIn && <LoginTab setLoggedIn={setLoggedIn} />}
+        </>
+    )
 }
 
 export default App

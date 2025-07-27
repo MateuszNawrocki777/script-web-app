@@ -1,17 +1,17 @@
 import api from "../api";
 import { setTokenInterceptor } from "../api";
+import qs from "qs";
 
 
 export default function logInRequest(username, password, setErrorMessage, setLoggedIn) {
     if (checkIfLoginIsEmpty(username, password, setErrorMessage))
         return;
 
-    api.post("/login", {
-        username: username,
-        password: password
-    }).then((response) => {
+    sendLoginRequest(username, password)
+    .then((response) => {
         handleCorrectLogIn(response, setLoggedIn);
-    }).catch((error) => {
+    })
+    .catch((error) => {
         handleIncorrectLogIn(error, setErrorMessage);
     });
 }
@@ -27,6 +27,22 @@ function checkIfLoginIsEmpty(username, password, setErrorMessage) {
         return true;
     }
     return false;
+}
+
+function sendLoginRequest(username, password) {
+    const formData = qs.stringify({
+        grant_type: "password",
+        username: username,
+        password: password
+    })
+
+    return api.post("/login", formData,
+        {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }
+    )
 }
 
 function handleCorrectLogIn(response, setLoggedIn) {

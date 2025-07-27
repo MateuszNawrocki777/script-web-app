@@ -4,14 +4,13 @@ import logInRequest from "../services/api/requests/login";
 
 import "./Login.css"
 
+let username = "", password = "";
 
-export default function LoginTab() {
+export default function LoginTab({ setLoggedIn }) {
     const [errorMessage, setErrorMessage] = useState("");
 
-    let login = "", password = "";
-
     function handleLogin() {
-        logInRequest(login, password, setErrorMessage, true);
+        logInRequest(username, password, setErrorMessage, setLoggedIn);
     }
 
     return (
@@ -20,7 +19,7 @@ export default function LoginTab() {
                 Log in
             </h1>
             <input className="login-button" type="text" id="username" placeholder="Username"
-             onChange={(e) => {login = e.target.value}} />
+             onChange={(e) => {username = e.target.value}} />
             <input className="login-button" type="password" id="password" placeholder="Password"
              onChange={(e) => {password = e.target.value}} />
             <button className="login-button" id="login-button"
