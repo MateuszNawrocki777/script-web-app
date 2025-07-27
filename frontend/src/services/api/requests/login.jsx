@@ -3,17 +3,17 @@ import { setTokenInterceptor } from "../api";
 import qs from "qs";
 
 
-export default function logInRequest(username, password, setErrorMessage, setLoggedIn) {
+export default async function logInRequest(username, password, setErrorMessage, setLoggedIn) {
     if (checkIfLoginIsEmpty(username, password, setErrorMessage))
         return;
 
-    sendLoginRequest(username, password)
-    .then((response) => {
+    try {
+        const response = await sendLoginRequest(username, password)
         handleCorrectLogIn(response, setLoggedIn);
-    })
-    .catch((error) => {
+    }
+    catch (error) {
         handleIncorrectLogIn(error, setErrorMessage);
-    });
+    };
 }
 
 
