@@ -26,7 +26,7 @@ export default function LoginTab({ setLoggedIn }) {
              onClick={handleLogin}>
                 Log in
             </button>
-            {errorMessage !== "" && <p className="login-error-message">{errorMessage}</p>}
+            <p className="login-error-message">{errorMessage}</p>
         </div>
     );
 }

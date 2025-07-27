@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     background-color: #202020;
-    padding: 50px;
+    padding: 50px 50px 26px 50px;
     min-width: 30vw;
 }
 
@@ -18,4 +18,5 @@
     color: #d00000;
     margin: 0px;
     text-align: left;
+    min-height: 1.5rem;
 }
