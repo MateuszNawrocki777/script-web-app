@@ -13,3 +13,9 @@
 .login-button {
     margin-bottom: 15px;
 }
+
+.login-error-message {
+    color: #d00000;
+    margin: 0px;
+    text-align: left;
+}
