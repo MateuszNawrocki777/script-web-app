@@ -4,6 +4,7 @@
     background-color: #202020;
     padding: 50px 50px 26px 50px;
     min-width: 30vw;
+    border-radius: 20px;
 }
 
 .login-tab > h1 {
