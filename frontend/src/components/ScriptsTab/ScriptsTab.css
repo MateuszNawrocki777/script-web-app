@@ -1,0 +1,8 @@
+.scripts-tab {
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    padding: 50px;
+    min-width: 30vw;
+    border-radius: 20px;
+}

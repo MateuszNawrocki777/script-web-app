@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 import LoginTab from './components/LoginTab/LoginTab'
+import ScriptsTab from './components/ScriptsTab/ScriptsTab';
 
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
 
     return (
         <>
-            {!loggedIn && <LoginTab setLoggedIn={setLoggedIn} />}
+            {/* {!loggedIn && <LoginTab setLoggedIn={setLoggedIn} />} */}
+            <ScriptsTab />
         </>
     )
 }
