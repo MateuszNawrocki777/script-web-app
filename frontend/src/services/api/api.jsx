@@ -12,7 +12,6 @@ let tokenInterceptorId = null;
 
 
 export function setTokenInterceptor(token) {
-    console.log("Setting token: " + token);
     if (tokenInterceptorId !== null) {
         api.interceptors.request.eject(tokenInterceptorId);
     }
