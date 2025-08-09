@@ -8,8 +8,16 @@ const api = axios.create({
 export default api;
 
 
+let tokenInterceptorId = null;
+
+
 export function setTokenInterceptor(token) {
-    api.interceptors.request.use((config) => {
+    console.log("Setting token: " + token);
+    if (tokenInterceptorId !== null) {
+        api.interceptors.request.eject(tokenInterceptorId);
+    }
+
+    tokenInterceptorId = api.interceptors.request.use((config) => {
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
