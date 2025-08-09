@@ -84,7 +84,8 @@ def check_password(user: User, password: str):
 
 
 def generate_token(username: str):
-    expire = datetime.now(timezone.utc) + timedelta(TOKEN_VALIDITY_MINUTES)
+    expire = (datetime.now(timezone.utc) +
+              timedelta(minutes=TOKEN_VALIDITY_MINUTES))
     data = {
         "sub": username,
         "exp": expire
