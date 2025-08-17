@@ -24,8 +24,8 @@ export default function ScriptsTab({ setLoggedIn }) {
             {scripts.map((script) => (
             <ScriptRow
                 id={script.id}
-                name={"HALO"}
-                icon={"/defaultScriptIcon.svg"}
+                name={script.name}
+                icon={script.icon}
                 setLoggedIn={setLoggedIn}
                 key={script.id} />
             ))}
