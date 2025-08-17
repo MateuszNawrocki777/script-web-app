@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from access_functions import (get_user_by_username,  # noqa: E402
                               get_script_ids_by_username,  # noqa: E402
-                              get_scripts_by_username,  # noqa: E402
+                              get_scripts_for_frontend,  # noqa: E402
                               has_access_to_script,  # noqa: E402
                               get_script_file_by_id,  # noqa: E402
                               exists_user_with_username  # noqa: E402
@@ -23,17 +23,26 @@ TEST_USERS = [
         "hashedPassword":
         "$2b$12$9bzBAiMJfSfgBsvvzj4MTepX14OhyzI8IAuGMJYaQMtmMto2WmjlC",
         "scriptIds": [1]
+    },
+    {
+        "username": "NoIcon",
+        "hashedPassword":
+        "$2b$12$9bzBAiMJfSfgBsvvzj4MTepX14OhyzI8IAuGMJYaQMtmMto2WmjlC",
+        "scriptIds": [2]
     }
 ]
 
 TEST_SCRIPTS = [
     {
         "id": 1,
-        "file": "./scripts/example.sh"
+        "file": "./scripts/example.sh",
+        "name": "Example",
+        "icon": "ExampleIcon"
     },
     {
         "id": 2,
-        "file": "./scripts/different_example.sh"
+        "file": "./scripts/different_example.sh",
+        "name": "DifferentExample",
     }
 ]
 
@@ -71,19 +80,31 @@ def test_get_script_ids_by_username_not_found(use_test_db):
         get_script_ids_by_username("NonExistent")
 
 
-def test_get_scripts_by_username_found(use_test_db):
-    scripts = get_scripts_by_username("Example")
+def test_get_scripts_for_frontend_found(use_test_db):
+    scripts = get_scripts_for_frontend("Example")
     assert scripts == [
         {
             "id": 1,
-            "file": "./scripts/example.sh"
+            "name": "Example",
+            "icon": "ExampleIcon"
         }
     ]
 
 
-def test_get_scripts_by_username_not_found(use_test_db):
+def test_get_scripts_for_frontend_not_found(use_test_db):
     with pytest.raises(TypeError):
-        get_scripts_by_username("NonExistent")
+        get_scripts_for_frontend("NonExistent")
+
+
+def test_get_scripts_for_frontend_no_icon(use_test_db):
+    scripts = get_scripts_for_frontend("NoIcon")
+    assert scripts == [
+        {
+            "id": 2,
+            "name": "DifferentExample",
+            "icon": "/defaultScriptIcon.svg"
+        }
+    ]
 
 
 def test_has_access_to_script_correct(use_test_db):
