@@ -15,20 +15,30 @@ export default function ScriptsTab({ setLoggedIn }) {
         setIsLoading(true);
         getScripts(setLoggedIn).then((response) => {
             setScripts(response);
+            setIsLoading(false);
         });
-        setIsLoading(false);
     }, []);
 
     return (
         <div className="scripts-tab">
             {scripts.map((script) => (
-            <ScriptRow
-                id={script.id}
-                name={script.name}
-                icon={script.icon}
-                setLoggedIn={setLoggedIn}
-                key={script.id} />
-            ))}
+                <ScriptRow
+                    id={script.id}
+                    name={script.name}
+                    icon={script.icon}
+                    setLoggedIn={setLoggedIn}
+                    key={script.id} />
+                ))}
+            {isLoading &&
+                <h3 className="scripts-tab-loading">
+                    Loading scripts...
+                </h3>
+            }
+            {!isLoading && scripts.length === 0 &&
+                <h3 className="scripts-tab-loading">
+                    No scripts to display
+                </h3>
+            }
         </div>
     );
 }
