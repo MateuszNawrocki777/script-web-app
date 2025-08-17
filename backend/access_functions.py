@@ -1,4 +1,4 @@
-from dataloader import SCRIPTS, USERS
+from dataloader import SCRIPTS, USERS, FRONTEND_SCRIPTS
 
 
 def get_user_by_username(username: str):
@@ -13,10 +13,10 @@ def get_script_ids_by_username(username: str):
     return user["scriptIds"]
 
 
-def get_scripts_by_username(username: str):
+def get_scripts_for_frontend(username: str):
     script_ids = get_script_ids_by_username(username)
     script_list = []
-    for script in SCRIPTS:
+    for script in FRONTEND_SCRIPTS:
         if script["id"] in script_ids:
             script_list.append(script)
     return script_list

@@ -6,7 +6,7 @@ from typing import Annotated
 
 from security import get_username, login_function
 
-from access_functions import (get_scripts_by_username, has_access_to_script,
+from access_functions import (get_scripts_for_frontend, has_access_to_script,
                               get_script_file_by_id)
 
 import os
@@ -28,7 +28,7 @@ app.add_middleware(
 
 @app.get("/scripts")
 def get_my_scripts(username: Annotated[str, Depends(get_username)]):
-    return get_scripts_by_username(username)
+    return get_scripts_for_frontend(username)
 
 
 @app.post("/run/{script_id}")

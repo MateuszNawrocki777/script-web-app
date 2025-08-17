@@ -1,6 +1,8 @@
 [
     {
         "id": 1,
-        "file": "./scripts/example.sh"
+        "file": "./scripts/example.sh",
+        "name": "Example script",
+        "icon": "/defaultScriptIcon.svg"
     }
 ]
