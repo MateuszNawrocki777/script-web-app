@@ -13,13 +13,13 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS")
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS")
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=CORS_ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
