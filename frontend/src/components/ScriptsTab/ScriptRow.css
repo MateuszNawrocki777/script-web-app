@@ -19,10 +19,9 @@
 
 .script-icon {
     min-width: 5vw;
-    min-height: 5vh;
-    max-width: 5vh;
+    min-height: 5vw;
     max-width: 5vw;
-    aspect-ratio: 1;
+    max-height: 5vw;
 }
 
 .script-execute-button {
