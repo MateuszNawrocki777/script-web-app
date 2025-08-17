@@ -10,8 +10,9 @@ function App() {
 
     return (
         <>
-            {!loggedIn && <LoginTab setLoggedIn={setLoggedIn} />}
+            {loggedIn ?
             <ScriptsTab setLoggedIn={setLoggedIn} />
+            : <LoginTab setLoggedIn={setLoggedIn} />}
         </>
     )
 }
