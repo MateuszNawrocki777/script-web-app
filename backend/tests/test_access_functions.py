@@ -46,11 +46,26 @@ TEST_SCRIPTS = [
     }
 ]
 
+TEST_FRONTEND_SCRIPTS = [
+    {
+        "id": 1,
+        "name": "Example",
+        "icon": "ExampleIcon"
+    },
+    {
+        "id": 2,
+        "name": "DifferentExample",
+        "icon": "/defaultScriptIcon.svg"
+    }
+]
+
 
 @fixture
 def use_test_db(monkeypatch: MonkeyPatch):
     monkeypatch.setattr("access_functions.USERS", TEST_USERS)
     monkeypatch.setattr("access_functions.SCRIPTS", TEST_SCRIPTS)
+    monkeypatch.setattr("access_functions.FRONTEND_SCRIPTS",
+                        TEST_FRONTEND_SCRIPTS)
 
 
 def test_sanity_test():
