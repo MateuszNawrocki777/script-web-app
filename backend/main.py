@@ -38,7 +38,7 @@ def run_script(script_id, username: Annotated[str, Depends(get_username)]):
         script_file = get_script_file_by_id(script_id)
         if script_file is None:
             raise HTTPException(
-                status_code=401,
+                status_code=402,
                 detail="Script file not found"
             )
         subprocess.call(["/bin/sh", get_script_file_by_id(script_id)])
